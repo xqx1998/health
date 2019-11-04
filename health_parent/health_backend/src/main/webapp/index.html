@@ -43,7 +43,7 @@ rules：表单验证规则
                     let _this = this;
                     axios.post("/user/login.do",_this.user)
                         .then(function (response) {
-                            alert(response.data.username+":"+response.data.password)
+                            response.data === true ? alert("登录成功！") : alert("登录失败！")
                     },"json");
                 }
             }

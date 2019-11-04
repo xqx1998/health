@@ -1,12 +1,22 @@
 package com.eight.group.pojo;
+import	java.io.Serializable;
 
 /**
  * @author：xingquanxiang createTime：2019/11/3 20:57
  * description:
  */
-public class User {
+public class User implements Serializable{
+    private Integer id;
     private String username;
     private String password;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -27,7 +37,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
