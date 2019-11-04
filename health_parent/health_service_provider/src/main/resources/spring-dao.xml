@@ -15,17 +15,18 @@
 							http://www.springframework.org/schema/tx/spring-tx.xsd
 							http://www.springframework.org/schema/util
 							http://www.springframework.org/schema/util/spring-util.xsd">
-
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
     <!--数据源-->
     <bean id="dataSource"
           class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
-        <property name="username" value="root" />
-        <property name="password" value="root" />
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/health" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
     </bean>
     <!--spring和mybatis整合的工厂bean-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.eight.group.pojo"></property>
         <property name="dataSource" ref="dataSource" />
         <property name="plugins">
             <array>
@@ -39,10 +40,15 @@
                 </bean>
             </array>
         </property>
+        <!--<property name="mapperLocations">
+            <array>
+                <value>com/eight/group/mapper/UserMapper.xml</value>
+            </array>
+        </property>-->
     </bean>
     <!--批量扫描接口生成代理对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--指定接口所在的包-->
-        <property name="basePackage" value="com.itheima.dao" />
+        <property name="basePackage" value="com.eight.group.mapper" />
     </bean>
 </beans>

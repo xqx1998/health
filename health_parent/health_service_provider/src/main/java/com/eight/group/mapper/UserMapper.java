@@ -1,6 +1,9 @@
 package com.eight.group.mapper;
 
 import com.eight.group.pojo.User;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.mybatis.spring.annotation.MapperScan;
 
 /**
  * @author： xingquanxiang
@@ -13,5 +16,6 @@ public interface UserMapper {
      * @param user
      * @return
      */
+    // @Select("select * from user where username = #{user.username} AND password = #{user.password}")
     User getUserByUsernameAndPassword(User user);
 }
