@@ -13,4 +13,9 @@
     <select id="findById" parameterType="int" resultType="checkItem">
         select * from t_checkitem where id = #{id};
     </select>
+
+    <update id="edit" parameterType="checkItem">
+        update t_checkitem set code = #{code}, name = #{name}, sex = #{sex}, age = #{age}, price = #{price}, type = #{type},
+            attention = #{attention}, remark = #{remark} where id = #{id}
+    </update>
 </mapper>

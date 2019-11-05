@@ -29,7 +29,7 @@ public class CheckItemController {
         } catch (Exception e) {
             return new Result(false, MessageConstant.ADD_CHECKITEM_FAIL);
         }
-        return new Result(false, MessageConstant.ADD_CHECKITEM_SUCCESS);
+        return new Result(true, MessageConstant.ADD_CHECKITEM_SUCCESS);
     }
 
     @RequestMapping("/findPage")
@@ -52,6 +52,18 @@ public class CheckItemController {
             return  new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
     }
+
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Result edit(@RequestBody CheckItem checkItem){
+        try {
+            checkItemService.edit(checkItem);
+        } catch (Exception e) {
+            return new Result(false, MessageConstant.EDIT_CHECKITEM_FAIL);
+        }
+        return new Result(true, MessageConstant.EDIT_CHECKITEM_SUCCESS);
+    }
+
 
 
 }

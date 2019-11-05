@@ -59,4 +59,15 @@ public class CheckItemServiceImpl implements CheckItemService {
     public CheckItem findById(int id) {
         return checkItemMapper.findById(id);
     }
+
+    /**
+     * 更新检查项信息
+     *
+     * @param checkItem 要编辑的CheckItem对象
+     * @return
+     */
+    @Override
+    public void edit(CheckItem checkItem) {
+        checkItemMapper.edit(checkItem);
+    }
 }

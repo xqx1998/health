@@ -3,6 +3,7 @@ package com.xqx.eight.group.service;
 import com.eight.group.entity.PageResult;
 import com.eight.group.entity.QueryPageBean;
 import com.eight.group.pojo.CheckItem;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -31,4 +32,11 @@ public interface CheckItemService {
      * @return CheckItem对象
      */
     CheckItem findById(int id);
+
+    /**
+     * 更新检查项信息
+     * @param checkItem  要编辑的CheckItem对象
+     * @return
+     */
+    void edit(CheckItem checkItem);
 }

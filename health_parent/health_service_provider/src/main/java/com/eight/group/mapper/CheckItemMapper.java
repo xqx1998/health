@@ -27,4 +27,11 @@ public interface CheckItemMapper {
      * @return CheckItem对象
      */
     CheckItem findById(int id);
+
+    /**
+     * 更新检查项信息
+     * @param checkItem  要编辑的CheckItem对象
+     * @return
+     */
+    void edit(CheckItem checkItem);
 }
