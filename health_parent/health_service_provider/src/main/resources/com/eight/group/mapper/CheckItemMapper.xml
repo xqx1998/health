@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eight.group.mapper.CheckItemMapper">
+    <select id="add" parameterType="checkItem">
+        insert into t_checkitem(code,name,sex,age,price,type,attention,remark)
+            values (#{code},#{name},#{sex},#{age},#{price},#{type},#{attention},#{remark})
+    </select>
+
+    <select id="findPage" resultType="checkItem">
+        select * from t_checkitem
+    </select>
+
+    <select id="findById" parameterType="int" resultType="checkItem">
+        select * from t_checkitem where id = #{id};
+    </select>
+</mapper>
