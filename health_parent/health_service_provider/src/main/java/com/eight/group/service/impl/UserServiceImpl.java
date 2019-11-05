@@ -2,7 +2,7 @@ package com.eight.group.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.eight.group.mapper.UserMapper;
-import com.eight.group.pojo.User;
+import com.eight.group.pojo.TUser;
 import com.xqx.eight.group.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +17,7 @@ public class UserServiceImpl implements UserService {
     @Qualifier("userMapper")
     private UserMapper userMapper;
     @Override
-    public boolean login(User user) {
-        return userMapper.getUserByUsernameAndPassword(user)!=null;
+    public boolean login(TUser TUser) {
+        return userMapper.getUserByUsernameAndPassword(TUser)!=null;
     }
 }

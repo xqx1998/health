@@ -1,7 +1,7 @@
 package com.eight.group.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.eight.group.pojo.User;
+import com.eight.group.pojo.TUser;
 import com.xqx.eight.group.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,13 +19,13 @@ public class UserController {
     private UserService userService;
     /**
      * 用户登录请求
-     * @param user
+     * @param TUser
      * @return
      */
     @RequestMapping("/login")
     @ResponseBody
-    public boolean login(@RequestBody User user){
-        System.out.println("user = " + user);
-        return userService.login(user);
+    public boolean login(@RequestBody TUser TUser){
+        System.out.println("user = " + TUser);
+        return userService.login(TUser);
     }
 }

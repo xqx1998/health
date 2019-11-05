@@ -1,6 +1,6 @@
 package com.eight.group.test;
 
-import com.eight.group.pojo.User;
+import com.eight.group.pojo.TUser;
 import com.xqx.eight.group.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,10 +20,10 @@ public class UserServiceImpTest {
 
     @Test
     public void testLogin(){
-        User user = new User();
-        user.setUsername("xqx");
-        user.setPassword("1998");
-        boolean login = userService.login(user);
+        TUser TUser = new TUser();
+        TUser.setUsername("xqx");
+        TUser.setPassword("1998");
+        boolean login = userService.login(TUser);
         System.out.println("login = " + login);
     }
 }
