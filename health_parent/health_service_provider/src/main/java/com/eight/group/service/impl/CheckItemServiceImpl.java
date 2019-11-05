@@ -42,7 +42,7 @@ public class CheckItemServiceImpl implements CheckItemService {
         //分页助手参数设置
         PageHelper.startPage(queryPageBean.getCurrentPage(), queryPageBean.getPageSize());
         //调用mapper查询
-        List<CheckItem> list = checkItemMapper.findPage();
+        List<CheckItem> list = checkItemMapper.findPageByCondition(queryPageBean.getQueryString());
 
         list.forEach(s-> System.out.println(s));
         //放回封装后的结果
@@ -64,10 +64,24 @@ public class CheckItemServiceImpl implements CheckItemService {
      * 更新检查项信息
      *
      * @param checkItem 要编辑的CheckItem对象
-     * @return
      */
     @Override
     public void edit(CheckItem checkItem) {
         checkItemMapper.edit(checkItem);
+    }
+
+    /**
+     * 删除检查项
+     *
+     * @param id 检查项id
+     */
+    @Override
+    public void delete(int id) {
+        //判断当前检查项是还有与检查组关联
+        if (checkItemMapper.findCountByCheckItemId(id)>0){
+            //当前检查项已经被关联到检查组，不允许删除
+            throw new RuntimeException();
+        }
+        checkItemMapper.delete(id);
     }
 }

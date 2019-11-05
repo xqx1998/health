@@ -17,9 +17,10 @@ public interface CheckItemMapper {
 
     /**
      * 分页查询
+     * @param queryString 查询条件
      * @return List<CheckItem>
      */
-    List<CheckItem> findPage();
+    List<CheckItem> findPageByCondition(String queryString);
 
     /**
      * 根据id查询 检查项信息
@@ -34,4 +35,17 @@ public interface CheckItemMapper {
      * @return
      */
     void edit(CheckItem checkItem);
+
+    /**
+     * 查询 是否有与检查项关联的检查组 计数
+     * @param id
+     * @return
+     */
+    long findCountByCheckItemId(Integer id);
+
+    /**
+     * 删除检查项
+     * @param id 检查项id
+     */
+    void delete(int id);
 }

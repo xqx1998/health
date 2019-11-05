@@ -21,6 +21,11 @@ public class CheckItemController {
     @Reference
     private CheckItemService checkItemService;
 
+    /**
+     * 检查项添加
+     * @param checkItem
+     * @return Result对象结果
+     */
     @RequestMapping("/add")
     @ResponseBody
     public Result add(@RequestBody CheckItem checkItem){
@@ -32,6 +37,11 @@ public class CheckItemController {
         return new Result(true, MessageConstant.ADD_CHECKITEM_SUCCESS);
     }
 
+    /**
+     * 检查项分页查询
+     * @param queryPageBean
+     * @return
+     */
     @RequestMapping("/findPage")
     @ResponseBody
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
@@ -43,6 +53,11 @@ public class CheckItemController {
         }
     }
 
+    /**
+     * 检查项根据id查询
+     * @param id
+     * @return
+     */
     @RequestMapping("/findById")
     @ResponseBody
     public Result findById(int id){
@@ -53,6 +68,11 @@ public class CheckItemController {
         }
     }
 
+    /**
+     * 检查项编辑
+     * @param checkItem
+     * @return
+     */
     @RequestMapping("/edit")
     @ResponseBody
     public Result edit(@RequestBody CheckItem checkItem){
@@ -64,6 +84,21 @@ public class CheckItemController {
         return new Result(true, MessageConstant.EDIT_CHECKITEM_SUCCESS);
     }
 
+    /**
+     * 检查项根据id删除
+     * @param id
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(int id){
+        try {
+            checkItemService.delete(id);
+        } catch (Exception e) {
+            return new Result(false, MessageConstant.DELETE_CHECKITEM_FAIL);
+        }
+        return new Result(true, MessageConstant.DELETE_CHECKITEM_SUCCESS);
+    }
 
 
 }

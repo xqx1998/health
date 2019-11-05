@@ -36,7 +36,12 @@ public interface CheckItemService {
     /**
      * 更新检查项信息
      * @param checkItem  要编辑的CheckItem对象
-     * @return
      */
     void edit(CheckItem checkItem);
+
+    /**
+     * 删除检查项
+     * @param id 检查项id
+     */
+    void delete(int id);
 }
