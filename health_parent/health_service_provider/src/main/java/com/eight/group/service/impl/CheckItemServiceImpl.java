@@ -66,6 +66,7 @@ public class CheckItemServiceImpl implements CheckItemService {
      * @param checkItem 要编辑的CheckItem对象
      */
     @Override
+    @Transactional
     public void edit(CheckItem checkItem) {
         checkItemMapper.edit(checkItem);
     }
@@ -76,6 +77,7 @@ public class CheckItemServiceImpl implements CheckItemService {
      * @param id 检查项id
      */
     @Override
+    @Transactional
     public void delete(int id) {
         //判断当前检查项是还有与检查组关联
         if (checkItemMapper.findCountByCheckItemId(id)>0){
