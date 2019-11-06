@@ -38,9 +38,23 @@ public class CheckItemController {
     }
 
     /**
+     * 检查项查询所有
+     * @return PageResult对象
+     */
+    @RequestMapping("/findAll")
+    @ResponseBody
+    public PageResult findAll(){
+        try {
+            return checkItemService.findAll();
+        } catch (Exception e) {
+            return new PageResult(0L, null);
+        }
+    }
+
+    /**
      * 检查项分页查询
      * @param queryPageBean
-     * @return
+     * @return PageResult对象
      */
     @RequestMapping("/findPage")
     @ResponseBody

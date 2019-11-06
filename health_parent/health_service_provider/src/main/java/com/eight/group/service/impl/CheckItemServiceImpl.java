@@ -50,6 +50,20 @@ public class CheckItemServiceImpl implements CheckItemService {
     }
 
     /**
+     * 检查项 查询所有
+     * @return PageResult对象
+     */
+    @Override
+    public PageResult findAll() {
+        //调用mapper查询
+        List<CheckItem> list = checkItemMapper.findPageByCondition(null);
+
+        list.forEach(s-> System.out.println(s));
+        //放回封装后的结果
+        return new PageResult(null,list);
+    }
+
+    /**
      * 根据id查询 检查项信息
      *
      * @param id

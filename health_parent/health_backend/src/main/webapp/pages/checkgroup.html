@@ -282,9 +282,11 @@
             methods: {
                 //编辑
                 handleEdit() {
+
                 },
                 //添加
                 handleAdd () {
+
                 },
                 //分页查询
                 findPage() {
@@ -305,9 +307,15 @@
                 },
                 // 弹出添加窗口
                 handleCreate() {
+                    this.dialogFormVisible = true;
+                    axios.get("/checkitem/findAll.do").then((response)=>{
+                        this.tableData = response.data.rows;
+                    })
+
                 },
                 // 弹出编辑窗口
                 handleUpdate(row) {
+                    this.dialogFormVisible4Edit = true;
                 },
                 //切换页码
                 handleCurrentChange(currentPage) {

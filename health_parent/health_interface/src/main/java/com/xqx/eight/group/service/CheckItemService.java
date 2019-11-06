@@ -44,4 +44,10 @@ public interface CheckItemService {
      * @param id 检查项id
      */
     void delete(int id);
+
+    /**
+     * 检查项 查询所有
+     * @return PageResult对象
+     */
+    PageResult findAll();
 }
