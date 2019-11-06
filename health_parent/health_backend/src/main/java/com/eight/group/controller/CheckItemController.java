@@ -43,11 +43,11 @@ public class CheckItemController {
      */
     @RequestMapping("/findAll")
     @ResponseBody
-    public PageResult findAll(){
+    public Result findAll(){
         try {
-            return checkItemService.findAll();
+            return new Result(true,MessageConstant.QUERY_CHECKITEM_SUCCESS,checkItemService.findAll());
         } catch (Exception e) {
-            return new PageResult(0L, null);
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
     }
 

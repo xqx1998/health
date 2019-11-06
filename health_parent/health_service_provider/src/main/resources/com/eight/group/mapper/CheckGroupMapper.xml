@@ -5,8 +5,71 @@
         select * from t_checkgroup
         <if test="value != null and value.length>0">
             where code like concat('%',#{value},'%') or name like concat('%',#{value},'%')
-                or helpCode like concat('%',#{value},'%')
+            or helpCode like concat('%',#{value},'%')
         </if>
     </select>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="checkGroup">
+        insert into t_checkgroup(id,code,name,helpCode,sex,remark,attention) values(null,#{code},
+            #{name},#{helpCode},#{sex},#{remark},#{attention})
+    </insert>
+
+    <insert id="setCheckGroupAndCheckItem" parameterType="map">
+        insert into t_checkgroup_checkitem(checkgroup_id, checkitem_id) values
+        <foreach collection="checkitemIds" separator="," item="itemId">
+            (#{checkgroupId},#{itemId})
+        </foreach>
+    </insert>
+
+    <resultMap id="groupItemMap" type="checkGroup">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+        <collection property="checkItems" ofType="checkItem">
+            <id column="checkitem_id" property="id"/>
+        </collection>
+    </resultMap>
+
+    <select id="findById" parameterType="int" resultMap="groupItemMap">
+        select * from t_checkgroup g left join t_checkgroup_checkitem gi
+            on g.id = gi.checkgroup_id where g.id = #{id}
+    </select>
+
+    <delete id="deleteCheckGroupAndItemByGroupId" parameterType="int">
+        delete from t_checkgroup_checkitem where checkgroup_id = #{id}
+    </delete>
+
+    <update id="update" parameterType="checkGroup">
+        update t_checkgroup
+        <set>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="helpCode != null">
+                helpCode = #{helpCode},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="attention != null">
+                attention = #{attention},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from t_checkgroup where id = #{id}
+    </delete>
 
 </mapper>
