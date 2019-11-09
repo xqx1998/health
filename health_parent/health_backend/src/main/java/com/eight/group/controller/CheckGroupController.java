@@ -64,7 +64,6 @@ public class CheckGroupController {
     public Result findById(Integer id) {
         try {
             CheckGroup checkGroup = checkGroupService.findById(id);
-            System.out.println("checkGroup = " + checkGroup);
             return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS,
                     checkGroup);
         } catch (Exception e) {

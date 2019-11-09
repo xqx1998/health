@@ -1,27 +1,20 @@
 package com.eight.group.controller;
-import	java.lang.annotation.Retention;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.eight.group.constant.MessageConstant;
 import com.eight.group.constant.RedisConstant;
-import com.eight.group.entity.PageResult;
 import com.eight.group.entity.QueryPageBean;
 import com.eight.group.entity.Result;
 import com.eight.group.pojo.Setmeal;
 import com.eight.group.utils.LocalPictureUtils;
-import com.eight.group.utils.QiniuUtils;
 import com.eight.group.utils.UuidUtils;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
 import com.xqx.eight.group.service.SetmealService;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import redis.clients.jedis.JedisPool;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * @author：xingquanxiang createTime：2019/11/8 11:12

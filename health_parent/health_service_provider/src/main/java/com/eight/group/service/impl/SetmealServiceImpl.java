@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.eight.group.entity.PageResult;
 import com.eight.group.entity.QueryPageBean;
 import com.eight.group.mapper.SetmealMapper;
-import com.eight.group.pojo.CheckGroup;
 import com.eight.group.pojo.Setmeal;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
