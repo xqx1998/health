@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eight.group.mapper.OrderSettingMapper">
+    <select id="findCountByOrderDate" parameterType="date" resultType="long">
+        select count(*) from t_ordersetting where orderDate = #{orderDate}
+    </select>
+
+    <update id="editNumberByOrderDate" parameterType="orderSetting">
+        update t_ordersetting
+            <set>
+                <if test="number != null">
+                    number = #{number},
+                </if>
+                <if test="number != null">
+                    number = #{number},
+                </if>
+                <if test="number != null">
+                    reservations = #{reservations},
+                </if>
+            </set>
+            where orderDate = #{orderDate}
+    </update>
+
+    <insert id="add" parameterType="orderSetting">
+        insert into t_ordersetting(orderDate, number, reservations)
+            values (#{orderDate},#{number},
+            <if test="reservations != null">
+                #{reservations}
+            </if>
+            <if test="reservations == null">
+                0
+            </if>
+            )
+    </insert>
+
+    <select id="getOrderSettingByMonth" parameterType="map" resultType="orderSetting">
+        select * from t_ordersetting where orderDate between #{dateBegin} and #{dateEnd}
+    </select>
+
+    <select id="getAllOrderDate" resultType="date">
+        select orderDate from t_ordersetting
+    </select>
+
+
+
+
+</mapper>

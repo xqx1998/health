@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * 预约设置
@@ -16,6 +16,18 @@ import java.util.Date;
 public class OrderSetting implements Serializable{
     private Integer id ;
     private Date orderDate;//预约设置日期
-    private int number;//可预约人数
-    private int reservations ;//已预约人数
+    private Integer number;//可预约人数
+    private Integer reservations ;//已预约人数
+
+    public OrderSetting(Date orderDate, Integer number) {
+        this.orderDate = orderDate;
+        this.number = number;
+    }
+
+    public OrderSetting(Integer id, Date orderDate, Integer number, Integer reservations) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.number = number;
+        this.reservations = reservations;
+    }
 }

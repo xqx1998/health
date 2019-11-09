@@ -93,6 +93,4 @@ public class CheckGroupController {
         }
         return new Result(true, MessageConstant.DELETE_CHECKGROUP_SUCCESS);
     }
-
-
 }
