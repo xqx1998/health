@@ -12,9 +12,9 @@ import java.util.HashMap;
 public class QiniuUtilsTest {
     @Test
     public void test1() {
-        QiniuUtils.upload2Qiniu("C:\\Users\\ASDS\\Desktop\\a.png", "a2.png");
-        QiniuUtils.upload2Qiniu("C:\\Users\\ASDS\\Desktop\\JavaTree.png", "JavaTree1.png");
-        QiniuUtils.upload2Qiniu("C:\\Users\\ASDS\\Desktop\\index.jpg", "index1.jpg`");
+        // QiniuUtils.upload2Qiniu("C:\\Users\\ASDS\\Desktop\\a.png", "a2.png");
+        // QiniuUtils.upload2Qiniu("C:\\Users\\ASDS\\Desktop\\JavaTree.png", "JavaTree1.png");
+        // QiniuUtils.upload2Qiniu("C:\\Users\\ASDS\\Desktop\\index.jpg", "index1.jpg`");
     }
 
 }

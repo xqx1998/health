@@ -1,10 +1,17 @@
 package com.eight.group.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 
 /**
  * 封装返回结果
  */
+@Setter
+@Getter
+@ToString
 public class Result implements Serializable{
     private boolean flag;//执行结果，true为执行成功 false为执行失败
     private String message;//返回结果信息
@@ -19,35 +26,5 @@ public class Result implements Serializable{
         this.flag = flag;
         this.message = message;
         this.data = data;
-    }
-
-    public boolean isFlag() {
-        return flag;
-    }
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-    public String getMessage() {
-        return message;
-    }
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "Result{" +
-                "flag=" + flag +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
     }
 }

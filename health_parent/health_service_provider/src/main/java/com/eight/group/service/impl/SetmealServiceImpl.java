@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xqx.eight.group.service.SetmealService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ public class SetmealServiceImpl implements SetmealService {
      * @param checkgroupIds 所属检查组id们
      */
     @Override
+    @Transactional
     public void add(Setmeal setmeal, Integer[] checkgroupIds) {
         setmealMapper.add(setmeal);
         this.setSetmealAndCheckGroup(setmeal.getId(), checkgroupIds);
@@ -73,6 +75,7 @@ public class SetmealServiceImpl implements SetmealService {
      * @param checkgroupIds 关联检查组id们
      */
     @Override
+    @Transactional
     public void edit(Setmeal setmeal, Integer[] checkgroupIds) {
         setmealMapper.deleteSetmealAndCheckGroup(setmeal.getId());
         setmealMapper.edit(setmeal);
@@ -85,6 +88,7 @@ public class SetmealServiceImpl implements SetmealService {
      * @param id 套餐id
      */
     @Override
+    @Transactional
     public void delete(Integer id) {
         setmealMapper.deleteSetmealAndCheckGroup(id);
         setmealMapper.delete(id);
