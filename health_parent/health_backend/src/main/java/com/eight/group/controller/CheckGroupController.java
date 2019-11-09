@@ -38,6 +38,16 @@ public class CheckGroupController {
         }
     }
 
+    @RequestMapping("/findAll")
+    @ResponseBody
+    public Result findAll() {
+        try {
+            return new Result(true,MessageConstant.QUERY_CHECKGROUP_SUCCESS,checkGroupService.findAll());
+        } catch (Exception e) {
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
+
     @RequestMapping("/add")
     @ResponseBody
     public Result add(@RequestBody CheckGroup checkGroup, Integer[] checkitemIds) {
@@ -53,8 +63,10 @@ public class CheckGroupController {
     @ResponseBody
     public Result findById(Integer id) {
         try {
+            CheckGroup checkGroup = checkGroupService.findById(id);
+            System.out.println("checkGroup = " + checkGroup);
             return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS,
-                    checkGroupService.findById(id));
+                    checkGroup);
         } catch (Exception e) {
             return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
         }

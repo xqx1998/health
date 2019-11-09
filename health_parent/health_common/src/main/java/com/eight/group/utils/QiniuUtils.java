@@ -27,6 +27,7 @@ public class QiniuUtils {
     private static UploadManager uploadManager;
     private static Auth auth;
     private static String upToken;
+    public static String uploadURL;
 
     static {
         Properties properties = new Properties();
@@ -36,6 +37,7 @@ public class QiniuUtils {
             secretKey = properties.getProperty("secretKey");
             bucket = properties.getProperty("bucket");
             zone = properties.getProperty("zone");
+            uploadURL = properties.getProperty("uploadURL");
         } catch (IOException e) {
             e.printStackTrace();
         }

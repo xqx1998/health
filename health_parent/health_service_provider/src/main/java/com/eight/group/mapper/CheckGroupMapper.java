@@ -1,7 +1,5 @@
 package com.eight.group.mapper;
 
-import com.eight.group.entity.PageResult;
-import com.eight.group.entity.QueryPageBean;
 import com.eight.group.pojo.CheckGroup;
 
 import java.util.HashMap;
@@ -35,7 +33,7 @@ public interface CheckGroupMapper {
     /**
      * 根据检查组id查询 检查组信息 包含所属检查项列表
      * @param id
-     * @return
+     * @return CheckGroup
      */
     CheckGroup findById(Integer id);
 
@@ -56,4 +54,10 @@ public interface CheckGroupMapper {
      * @param id  检查组id
      */
     void delete(Integer id);
+
+    /**
+     * 检查组查询所有
+     * @return List<CheckGroup>
+     */
+    List<CheckGroup> findAll();
 }

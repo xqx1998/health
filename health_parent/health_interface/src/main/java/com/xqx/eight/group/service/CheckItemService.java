@@ -3,9 +3,7 @@ package com.xqx.eight.group.service;
 import com.eight.group.entity.PageResult;
 import com.eight.group.entity.QueryPageBean;
 import com.eight.group.pojo.CheckItem;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
 
 /**
  * @author： xingquanxiang
