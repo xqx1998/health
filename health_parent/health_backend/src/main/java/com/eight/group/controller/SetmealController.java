@@ -8,6 +8,7 @@ import com.eight.group.entity.PageResult;
 import com.eight.group.entity.QueryPageBean;
 import com.eight.group.entity.Result;
 import com.eight.group.pojo.Setmeal;
+import com.eight.group.utils.LocalPictureUtils;
 import com.eight.group.utils.QiniuUtils;
 import com.eight.group.utils.UuidUtils;
 import com.sun.jersey.api.client.Client;
@@ -29,7 +30,6 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/setmeal")
 public class SetmealController {
-    private String uploadPath = QiniuUtils.uploadURL;
     @Reference
     private SetmealService setmealService;
 
@@ -46,13 +46,8 @@ public class SetmealController {
         String imgFileName = imgFile.getOriginalFilename();
         //改名
         imgFileName = UuidUtils.getUuid() + imgFileName.substring(imgFileName.lastIndexOf("."));
-        //创建客户端
-        Client client = Client.create();
-        //指定上传路径与文件名
-        WebResource resource = client.resource(uploadPath + imgFileName);
         try {
-            //上传（其本质就是文件以字节流的形式重新写入到其他服务器）
-            resource.put(imgFile.getBytes());
+            LocalPictureUtils.upload(imgFileName, imgFile.getBytes());
         } catch (IOException e) {
             return new Result(false, MessageConstant.PIC_UPLOAD_FAIL);
         }
@@ -107,8 +102,8 @@ public class SetmealController {
 
     @RequestMapping("/edit")
     public Result edit(@RequestBody Setmeal setmeal, Integer[] checkgroupIds) {
-        // todo
-        // Setmeal oldSetmeal = setmealService.findById(setmeal.getId());
+        // todo 在修改之前查出数据库中套餐信息
+        Setmeal oldSetmeal = setmealService.findById(setmeal.getId());
         if (setmeal.getCode()!=null) {
             try {
                 setmealService.edit(setmeal, checkgroupIds);
@@ -116,10 +111,10 @@ public class SetmealController {
                 return new Result(false, MessageConstant.EDIT_SETMEAL_FAIL);
             }
             //todo 判断图片是否已经更改 是 则删除图片服务器中之前的图片文件 删除redis中之前的图片名称数据
-           /* if(oldSetmeal.getImg()!=null && !oldSetmeal.equals(setmeal.getImg())){
+            if(oldSetmeal.getImg()!=null && !oldSetmeal.equals(setmeal.getImg())){
                 //将之前的图片名称在redis集合中删除   setmealPicDbResources
-                jedisPool.getResource().spop(RedisConstant.SETMEAL_PIC_DB_RESOURCES);
-            }*/
+                jedisPool.getResource().srem(RedisConstant.SETMEAL_PIC_DB_RESOURCES, oldSetmeal.getImg());
+            }
             //将添加到数据库中的图片名称存到redis集合中   setmealPicDbResources
             jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_DB_RESOURCES, setmeal.getImg());
             return new Result(true, MessageConstant.EDIT_SETMEAL_SUCCESS);
