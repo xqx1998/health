@@ -21,10 +21,10 @@ import java.util.logging.SimpleFormatter;
 public class OrderSettingServiceImpl implements OrderSettingService {
 
     @Autowired
-    private static OrderSettingMapper orderSettingMapper;
+    private OrderSettingMapper orderSettingMapper;
 
     @Autowired
-    private static JedisPool jedisPool;
+    private JedisPool jedisPool;
 
     //todo  如何进行加载
     /*static {
