@@ -6,18 +6,24 @@ import com.eight.group.mapper.OrderSettingMapper;
 import com.eight.group.pojo.OrderSetting;
 import com.xqx.eight.group.service.OrderSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.logging.SimpleFormatter;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author：xingquanxiang createTime：2019/11/9 16:41
  * description:
  */
 @Service(interfaceClass = OrderSettingService.class)
+@Order
 public class OrderSettingServiceImpl implements OrderSettingService {
 
     @Autowired
@@ -26,8 +32,10 @@ public class OrderSettingServiceImpl implements OrderSettingService {
     @Autowired
     private JedisPool jedisPool;
 
-    //todo  如何进行加载
-    /*static {
+    private static int initOrderSettingDateToRedisStatus = 1;
+
+    //todo  将数据库中预约设置当前日期之后的日期存到redis中 如何进行加载
+    private void initOrderSettingDateToRedis() {
         List<Date> allOrderDate = orderSettingMapper.getAllOrderDate();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Jedis resource = jedisPool.getResource();
@@ -36,10 +44,8 @@ public class OrderSettingServiceImpl implements OrderSettingService {
             resource.sadd(RedisConstant.ORDER_SETTING_DB_ORDER_DATE, simpleDateFormat.format(date));
         }
         long end = System.currentTimeMillis();
-        System.out.println("共耗时："+(end-begin));
-    }*/
-
-
+        System.out.println("共耗时：" + (end - begin));
+    }
 
     /**
      * 批量添加预约设置数据
@@ -48,19 +54,27 @@ public class OrderSettingServiceImpl implements OrderSettingService {
      */
     @Override
     public void add(List<OrderSetting> orderSettingList) {
+        if (initOrderSettingDateToRedisStatus == 1) {
+            this.initOrderSettingDateToRedis();
+            initOrderSettingDateToRedisStatus = 0;
+        }
         if (orderSettingList != null && orderSettingList.size() > 0) {
             Set<String> orderDates = jedisPool.getResource().smembers(RedisConstant.ORDER_SETTING_DB_ORDER_DATE);
+            //获取当前日期
+            Date currentDate = new Date(System.currentTimeMillis());
             for (OrderSetting orderSetting : orderSettingList) {
-                // 检查此数据（日期）是否存在
-                if (orderDates.contains(orderSetting.getOrderDate().toString())) {
-                    //已存在，执行更新操作
-                    orderSettingMapper.editNumberByOrderDate(orderSetting);
-                } else {
-                    // 不存在，执行添加操作 数据库中
-                    orderSettingMapper.add(orderSetting);
-                    //添加预约设置的日期到redis缓存中
-                    jedisPool.getResource().sadd(RedisConstant.ORDER_SETTING_DB_ORDER_DATE,
-                            orderSetting.getOrderDate().toString());
+                if (orderSetting.getOrderDate().after(currentDate)) {
+                    // 检查此数据（日期）是否存在
+                    if (orderDates.contains(orderSetting.getOrderDate().toString())) {
+                        //已存在，执行更新操作
+                        orderSettingMapper.editNumberByOrderDate(orderSetting);
+                    } else {
+                        // 不存在，执行添加操作 数据库中
+                        orderSettingMapper.add(orderSetting);
+                        //添加预约设置的日期到redis缓存中
+                        jedisPool.getResource().sadd(RedisConstant.ORDER_SETTING_DB_ORDER_DATE,
+                                orderSetting.getOrderDate().toString());
+                    }
                 }
             }
         }
@@ -89,6 +103,10 @@ public class OrderSettingServiceImpl implements OrderSettingService {
      */
     @Override
     public void editNumberByDate(OrderSetting orderSetting) {
+        if (initOrderSettingDateToRedisStatus == 1) {
+            this.initOrderSettingDateToRedis();
+            initOrderSettingDateToRedisStatus = 0;
+        }
         Set<String> orderDates = jedisPool.getResource().smembers(RedisConstant.ORDER_SETTING_DB_ORDER_DATE);
         // 检查此数据（日期）是否存在
         if (orderDates.contains(orderSetting.getOrderDate().toString())) {

@@ -92,4 +92,25 @@ public class SetmealServiceImpl implements SetmealService {
         setmealMapper.deleteSetmealAndCheckGroup(id);
         setmealMapper.delete(id);
     }
+
+    /**
+     * 查询所有套餐
+     *
+     * @return
+     */
+    @Override
+    public List<Setmeal> findAll() {
+        return setmealMapper.findAll();
+    }
+
+    /**
+     * 根据套餐id查询套餐详情（套餐基本详情， 套餐对应的检查组信息， 检查组对应的检查项信息）
+     *
+     * @param id
+     * @return　Setmeal
+     */
+    @Override
+    public Setmeal findByIdDetail(Integer id) {
+        return setmealMapper.findByIdDetail(id.intValue());
+    }
 }

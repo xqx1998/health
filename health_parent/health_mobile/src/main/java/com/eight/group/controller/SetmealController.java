@@ -19,11 +19,33 @@ public class SetmealController {
     private SetmealService setmealService;
 
     /**
-     * 获取套餐
-     * @return
+     * 获取套餐列表
+     * @return Result
      */
     @RequestMapping("/getSetmeal")
     public Result getSetmeal() {
-        return new Result(true, MessageConstant.QUERY_SETMEALLIST_SUCCESS);
+        try {
+            return new Result(true, MessageConstant.QUERY_SETMEALLIST_SUCCESS, setmealService.findAll());
+        } catch (Exception e) {
+            return new Result(false, MessageConstant.QUERY_SETMEALLIST_FAIL);
+        }
+    }
+
+    /**
+     * 根据id查询套餐信息
+     * @param id 套餐id
+     * @return Result
+     */
+    @RequestMapping("/findById")
+    public Result findById(Integer id){
+        if (id!=null){
+            try {
+                return new Result(true, MessageConstant.QUERY_SETMEAL_SUCCESS, setmealService.findByIdDetail(id));
+            } catch (Exception e) {
+                return new Result(false, MessageConstant.QUERY_SETMEAL_FAIL);
+            }
+        }else {
+            return new Result(false, MessageConstant.QUERY_SETMEAL_FAIL);
+        }
     }
 }

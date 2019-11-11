@@ -2,10 +2,9 @@ package com.eight.group.mapper;
 
 import com.eight.group.pojo.OrderSetting;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author： xingquanxiang

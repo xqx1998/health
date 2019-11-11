@@ -22,4 +22,12 @@ public class CheckGroup implements Serializable {
     private String remark;//介绍
     private String attention;//注意事项
     private List<CheckItem> checkItems;//一个检查组合包含多个检查项
+
+    public List<CheckItem> getCheckItems() {
+        return checkItems;
+    }
+
+    public void setCheckItems(List<CheckItem> checkItems) {
+        this.checkItems = checkItems;
+    }
 }

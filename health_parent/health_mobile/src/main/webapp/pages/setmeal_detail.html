@@ -22,7 +22,7 @@
     <!-- 页面头部 -->
     <div class="top-header">
         <span class="f-left"><i class="icon-back" onclick="history.go(-1)"></i></span>
-        <span class="center">传智健康</span>
+        <span class="center">心星健康</span>
         <span class="f-right"><i class="icon-more"></i></span>
     </div>
     <!-- 页面内容 -->
@@ -91,10 +91,12 @@
             }
         },
         mounted(){
+            //根据套餐id查询套餐详情（套餐基本详情， 套餐对应的检查组信息， 检查组对应的检查项信息）
             axios.post("/setmeal/findById.do?id=" + id).then((response) => {
                 if(response.data.flag){
                     this.setmeal = response.data.data;
-                    this.imgUrl = 'http://pqjroc654.bkt.clouddn.com/' + this.setmeal.img;
+                    <!-- todo 图片URL拼接 -->
+                    this.imgUrl = 'http://localhost:8080/fileServer/upload/' + this.setmeal.img;
                 }
             });
         }

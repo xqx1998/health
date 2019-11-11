@@ -2,8 +2,9 @@ package com.xqx.eight.group.service;
 
 import com.eight.group.entity.PageResult;
 import com.eight.group.entity.QueryPageBean;
-import com.eight.group.pojo.CheckGroup;
 import com.eight.group.pojo.Setmeal;
+
+import java.util.List;
 
 /**
  * @author： xingquanxiang
@@ -44,4 +45,17 @@ public interface SetmealService {
      * @param id 套餐id
      */
     void delete(Integer id);
+
+    /**
+     * 查询所有套餐
+     * @return
+     */
+    List<Setmeal> findAll();
+
+    /**
+     * 根据套餐id查询套餐详情（套餐基本详情， 套餐对应的检查组信息， 检查组对应的检查项信息）
+     * @param id
+     * @return　Setmeal
+     */
+    Setmeal findByIdDetail(Integer id);
 }

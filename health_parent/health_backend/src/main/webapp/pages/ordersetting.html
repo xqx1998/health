@@ -145,7 +145,7 @@
                         inputPattern: /^[0-9]*[1-9][0-9]*$/,
                         inputErrorMessage: '只能输入正整数'
                     }).then(({ value }) => {
-//发送ajax请求根据日期修改可预约人数
+                        //发送ajax请求根据日期修改可预约人数
                         axios.post("/ordersetting/editNumberByDate.do",{
                             orderDate:this.formatDate(day.getFullYear(),day.getMonth()+1,day.getDate()), //
                             number:value //可预约人数
@@ -250,14 +250,6 @@
                             dayobject.index = index++;
                         this.days.push(dayobject);
                     }
-
-                    /*this.leftobj = [
-                        { orderDate: 1, number: 120, reservations: 1 },
-                        { orderDate: 3, number: 120, reservations: 1 },
-                        { orderDate: 4, number: 120, reservations: 120 },
-                        { orderDate: 6, number: 120, reservations: 1 },
-                        { orderDate: 8, number: 120, reservations: 1 }
-                    ];*/
 
                     this.getOrderSettingByMonth();
                 },

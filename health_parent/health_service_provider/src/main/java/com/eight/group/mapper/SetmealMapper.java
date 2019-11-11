@@ -55,4 +55,8 @@ public interface SetmealMapper {
      * @param id 套餐id
      */
     void delete(Integer id);
+
+    List<Setmeal> findAll();
+
+    Setmeal findByIdDetail(int intValue);
 }

@@ -11,10 +11,7 @@
                 <if test="number != null">
                     number = #{number},
                 </if>
-                <if test="number != null">
-                    number = #{number},
-                </if>
-                <if test="number != null">
+                <if test="reservations != null">
                     reservations = #{reservations},
                 </if>
             </set>
@@ -37,8 +34,8 @@
         select * from t_ordersetting where orderDate between #{dateBegin} and #{dateEnd}
     </select>
 
-    <select id="getAllOrderDate" resultType="date">
-        select orderDate from t_ordersetting
+    <select id="getAllOrderDate" resultType="java.sql.Date">
+        select orderDate from t_ordersetting where orderDate>current_date()
     </select>
 
 
