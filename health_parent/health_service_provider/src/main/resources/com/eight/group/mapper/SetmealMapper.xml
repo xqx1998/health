@@ -131,7 +131,7 @@
             left join t_checkgroup g on sc.checkgroup_id = g.id
             left join t_checkgroup_checkitem gi on g.id = gi.checkgroup_id
             left join t_checkitem i on gi.checkitem_id = i.id
-        where s.id = 13
+        where s.id = #{id}
     </select>
 
 </mapper>

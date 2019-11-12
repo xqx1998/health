@@ -15,10 +15,10 @@ import java.util.List;
  * @author：xingquanxiang createTime：2019/11/11 18:11
  * description:
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring-dao.xml","classpath:spring-tx.xml"})
+// @RunWith(SpringJUnit4ClassRunner.class)
+// @ContextConfiguration({"classpath:spring-dao.xml","classpath:spring-tx.xml"})
 public class SetmealTest {
-    @Autowired
+    /*@Autowired
     private SetmealMapper setmealMapper;
 
     @Test
@@ -28,5 +28,5 @@ public class SetmealTest {
 
         Setmeal byId = setmealMapper.findById(13);
         System.out.println("byId = " + byId);
-    }
+    }*/
 }

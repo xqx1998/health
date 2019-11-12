@@ -2,7 +2,7 @@ package com.eight.group.mapper;
 
 import com.eight.group.pojo.OrderSetting;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +15,7 @@ public interface OrderSettingMapper {
 
     /**
      * 根据日期查询预约是否已存在
+     * TODO 未使用 已用redis缓存实现
      * @param orderDate 预约日期
      * @return
      */
@@ -40,7 +41,11 @@ public interface OrderSettingMapper {
     List<OrderSetting> getOrderSettingByMonth(Map map);
 
     /**
-     *
+     * 获取当前服务器启动时间之后的日期
      */
     List<Date> getAllOrderDate();
+
+    OrderSetting findByOrderDate(String orderDate);
+
+    void editReservationsByOrderDate(OrderSetting orderSetting);
 }

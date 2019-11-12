@@ -18,6 +18,10 @@
             where orderDate = #{orderDate}
     </update>
 
+    <update id="editReservationsByOrderDate">
+        update t_ordersetting set reservations = #{reservations} where orderDate = #{orderDate}
+    </update>
+
     <insert id="add" parameterType="orderSetting">
         insert into t_ordersetting(orderDate, number, reservations)
             values (#{orderDate},#{number},
@@ -31,14 +35,16 @@
     </insert>
 
     <select id="getOrderSettingByMonth" parameterType="map" resultType="orderSetting">
-        select * from t_ordersetting where orderDate between #{dateBegin} and #{dateEnd}
+        select id, orderDate, number, reservations from t_ordersetting where orderDate between #{dateBegin} and #{dateEnd}
     </select>
 
-    <select id="getAllOrderDate" resultType="java.sql.Date">
+    <select id="getAllOrderDate" resultType="java.util.Date">
         select orderDate from t_ordersetting where orderDate>current_date()
     </select>
 
-
+    <select id="findByOrderDate" resultType="orderSetting">
+       select * from t_ordersetting where orderDate = #{orderDate}
+    </select>
 
 
 </mapper>

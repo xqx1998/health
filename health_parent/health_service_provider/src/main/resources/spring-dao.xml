@@ -40,11 +40,6 @@
                 </bean>
             </array>
         </property>
-        <!--<property name="mapperLocations">
-            <array>
-                <value>com/eight/group/mapper/UserMapper.xml</value>
-            </array>
-        </property>-->
     </bean>
     <!--批量扫描接口生成代理对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * 体检预约信息
@@ -25,4 +25,20 @@ public class Order implements Serializable{
     private String orderStatus;//预约状态（是否到诊）
     private Integer setmealId;//体检套餐id
 
+    public Order() {}
+
+    public Order(Integer memberId, Date orderDate, Integer setmealId) {
+        this.memberId = memberId;
+        this.orderDate = orderDate;
+        this.setmealId = setmealId;
+    }
+
+    public Order(Integer id, Integer memberId, Date orderDate, String orderType, String orderStatus, Integer setmealId) {
+        this.id = id;
+        this.memberId = memberId;
+        this.orderDate = orderDate;
+        this.orderType = orderType;
+        this.orderStatus = orderStatus;
+        this.setmealId = setmealId;
+    }
 }

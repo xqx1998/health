@@ -35,6 +35,7 @@ public class SetmealServiceImpl implements SetmealService {
         this.setSetmealAndCheckGroup(setmeal.getId(), checkgroupIds);
     }
 
+
     private void setSetmealAndCheckGroup(Integer id, Integer[] checkgroupIds){
         if (checkgroupIds!=null && checkgroupIds.length>0) {
             HashMap<String, Object> map = new HashMap<>();

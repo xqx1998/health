@@ -27,9 +27,13 @@ public class SMSUtils {
 		Properties properties = new Properties();
 		try {
 			properties.load(QiniuUtils.class.getClassLoader().getResourceAsStream("sms.properties"));
+			//访问密钥ID
 			accessKeyId = properties.getProperty("accessKeyID");
+			//访问密钥密码
 			accessKeySecret = properties.getProperty("accessKeySecret");
+			//指定短信验证码模板
 			VALIDATE_CODE = properties.getProperty("VALIDATE_CODE");
+			//指定预约成功通知短信模板
 			ORDER_NOTICE = properties.getProperty("ORDER_NOTICE");
 		} catch (IOException e) {
 			e.printStackTrace();

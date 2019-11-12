@@ -10,7 +10,7 @@ import org.springframework.core.annotation.Order;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 
 import java.util.HashMap;
