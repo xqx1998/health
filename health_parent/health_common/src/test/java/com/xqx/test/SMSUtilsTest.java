@@ -11,7 +11,7 @@ import org.junit.Test;
 public class SMSUtilsTest {
     @Test
     public void test1() throws ClientException {
-        // SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE, "13529361695", "1998");
-        SMSUtils.sendShortMessage(SMSUtils.ORDER_NOTICE, "13529361695", "2019/11/14");
+        SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE, "13529361695", "1998");
+        // SMSUtils.sendShortMessage(SMSUtils.ORDER_NOTICE, "13529361695", "2019/11/14");
     }
 }
