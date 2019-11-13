@@ -34,7 +34,7 @@
             )
     </insert>
 
-    <select id="getOrderSettingByMonth" parameterType="map" resultType="orderSetting">
+    <select id="getOrderSettingByMonth" parameterType="map" resultType="com.eight.group.pojo.OrderSetting">
         select id, orderDate, number, reservations from t_ordersetting where orderDate between #{dateBegin} and #{dateEnd}
     </select>
 
@@ -42,7 +42,7 @@
         select orderDate from t_ordersetting where orderDate>current_date()
     </select>
 
-    <select id="findByOrderDate" resultType="orderSetting">
+    <select id="findByOrderDate" resultType="com.eight.group.pojo.OrderSetting">
        select * from t_ordersetting where orderDate = #{orderDate}
     </select>
 
