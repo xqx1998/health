@@ -22,12 +22,11 @@ public class ValidateCodeController {
     private JedisPool jedisPool;
 
     @RequestMapping("/send4Order")
-    public Result Send4Order(String telephone){
+    public Result send4Order(String telephone){
         //生成四位验证码
         Integer validateCode = ValidateCodeUtils.generateValidateCode(4);
        /* try {
             SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE, telephone, validateCode.toString());
-
         } catch (ClientException e) {
             //todo 异常处理
             e.printStackTrace();
@@ -40,4 +39,25 @@ public class ValidateCodeController {
         //验证码发送成功
         return new Result(true, MessageConstant.SEND_VALIDATECODE_SUCCESS);
     }
+
+    @RequestMapping("/send4Login")
+    public Result send4Login(String telephone){
+        //生成四位验证码
+        Integer validateCode = ValidateCodeUtils.generateValidateCode(6);
+        /*try {
+            SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE, telephone, validateCode.toString());
+        } catch (ClientException e) {
+            //todo 异常处理
+            e.printStackTrace();
+            //验证码发送失败
+            return new Result(true, MessageConstant.SEND_VALIDATECODE_FAIL);
+        }*/
+        System.out.println("发送的手机验证码为："+validateCode+", 接收手机号："+telephone);
+        //将生成的验证码存储到redis中 5分钟后失效
+        jedisPool.getResource().setex(telephone + RedisConstant.SENDTYPE_LOGIN, 5 * 60, validateCode.toString());
+        //验证码发送成功
+        return new Result(true, MessageConstant.SEND_VALIDATECODE_SUCCESS);
+    }
+
+
 }
