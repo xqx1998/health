@@ -1,6 +1,7 @@
 package com.xqx.eight.group.service;
 
 import com.eight.group.entity.Result;
+import com.eight.group.pojo.Order;
 
 import java.util.Map;
 
@@ -16,4 +17,11 @@ public interface OrderService {
      * @return Result
      */
     Result order(Map map) throws Exception;
+
+    /**
+     * 根据id查询预约信息
+     * @param id
+     * @return Order
+     */
+    Order findById(Integer id);
 }

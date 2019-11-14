@@ -28,7 +28,7 @@ public interface OrderMapper {
      * @param id
      * @return  Map
      */
-    Map findById4Detail(Integer id);
+    Order findById4Detail(Integer id);
 
     /**
      * 根据日期统计预约数

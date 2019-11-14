@@ -57,6 +57,7 @@ public class OrderServiceImpl implements OrderService {
         if (member != null){
             //判断是否在重复预约
             Integer memberId = member.getId();
+            //转化表单预约日期
             Date date = new Date(DateUtils.parseString2Date(orderDate).getTime());
             String setmealId = (String) map.get("setmealId");
             //根据条件查询
@@ -92,5 +93,16 @@ public class OrderServiceImpl implements OrderService {
             return new Result(true, MessageConstant.ORDER_FAIL);
         }
         return new Result(true, MessageConstant.ORDER_SUCCESS, order.getId());
+    }
+
+    /**
+     * 根据id查询预约信息
+     *
+     * @param id
+     * @return Order
+     */
+    @Override
+    public Order findById(Integer id) {
+        return orderMapper.findById4Detail(id);
     }
 }

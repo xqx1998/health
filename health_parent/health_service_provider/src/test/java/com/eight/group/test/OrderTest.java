@@ -15,20 +15,28 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author：xingquanxiang createTime：2019/11/12 18:44
  * description:
  */
-// @RunWith(SpringJUnit4ClassRunner.class)
-// @ContextConfiguration({"classpath:spring-dao.xml","classpath:spring-tx.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({"classpath:spring-dao.xml","classpath:spring-tx.xml"})
 public class OrderTest {
-   /* @Autowired
+    @Autowired
     private OrderSettingMapper orderSettingMapper;
     @Autowired
     private MemberMapper memberMapper;
     @Autowired
     private OrderMapper orderMapper;
+
+    @Test
+    public void findById() {
+        Order order = orderMapper.findById4Detail(23);
+        System.out.println("order = " + order.toString());
+
+    }
 
     @Test
     public void testFindByDateWitOrderSetting() throws Exception {
@@ -67,6 +75,5 @@ public class OrderTest {
         //4.检查当前用户是否为会员，如果是会员则直接完成预约，如果不是会员则自动完成注册并进行预约
         orderSettingMapper.editReservationsByOrderDate(orderSetting);
     }
-*/
 
 }
