@@ -1,6 +1,6 @@
 package com.eight.group.mapper;
 
-import com.eight.group.pojo.TUser;
+import com.eight.group.pojo.User;
 
 /**
  * @author： xingquanxiang
@@ -9,12 +9,9 @@ import com.eight.group.pojo.TUser;
  */
 public interface UserMapper {
     /**
-     * 根据用户名和密码查询用户信息
-     * @param TUser
+     * 根据用户名查询用户信息
+     * @param username
      * @return
      */
-    // @Select("select * from user where username = #{user.username} AND password = #{user.password}")
-    TUser getUserByUsernameAndPassword(TUser TUser);
-
-    TUser findByUsername(String username);
+    User findByUsername(String username);
 }

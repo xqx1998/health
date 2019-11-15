@@ -6,6 +6,7 @@ import com.eight.group.entity.QueryPageBean;
 import com.eight.group.entity.Result;
 import com.eight.group.pojo.CheckItem;
 import com.xqx.eight.group.service.CheckItemService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +60,6 @@ public class CheckItemController {
     @RequestMapping("/findPage")
     @ResponseBody
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
-        System.out.println("queryPageBean = " + queryPageBean);
         try {
             return checkItemService.findPage(queryPageBean);
         } catch (Exception e) {
@@ -103,6 +103,7 @@ public class CheckItemController {
      * @param id
      * @return
      */
+    @PreAuthorize("hasAuthority('CHECKITEM_DELETE')")
     @RequestMapping("/delete")
     @ResponseBody
     public Result delete(int id){
@@ -113,6 +114,4 @@ public class CheckItemController {
         }
         return new Result(true, MessageConstant.DELETE_CHECKITEM_SUCCESS);
     }
-
-
 }

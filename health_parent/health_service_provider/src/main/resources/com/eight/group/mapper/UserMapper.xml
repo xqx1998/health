@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.eight.group.mapper.UserMapper">
-    <select id="getUserByUsernameAndPassword" parameterType="tuser" resultType="com.eight.group.pojo.TUser">
-        select * from user where username = #{username} AND password = #{password}
-    </select>
-    <select id="findByUsername" resultType="com.eight.group.pojo.TUser">
-        select * from user where username = #{username}
+    <resultMap id="userWithRoleWithPermissionMap" type="com.eight.group.pojo.User" autoMapping="true">
+        <id column="id" property="id" />
+        <collection property="roles" ofType="com.eight.group.pojo.Role">
+            <id column="rid" property="id"/>
+            <result column="rname" property="name"/>
+            <result column="rkeyword" property="keyword"/>
+            <result column="rdescription" property="description"/>
+            <collection property="permissions" ofType="com.eight.group.pojo.Permission">
+                <id column="pid" property="id"/>
+                <result column="pname" property="name"/>
+                <result column="pkeyword" property="keyword"/>
+                <result column="pdescription" property="description"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="findByUsername" parameterType="string" resultMap="userWithRoleWithPermissionMap">
+       select
+            u.*,
+            tr.id rid, tr.name rname, tr.keyword rkeyword, tr.description rdescription,
+            tp.id pid, tp.name pname, tp.keyword pkeyword, tp.description pdescription
+        from t_user u left join t_user_role tur on u.id = tur.user_id
+            left join t_role tr on tur.role_id = tr.id
+            left join t_role_permission trp on tr.id = trp.role_id
+            left join t_permission tp on trp.permission_id = tp.id
+            where u.username = #{username}
     </select>
 </mapper>

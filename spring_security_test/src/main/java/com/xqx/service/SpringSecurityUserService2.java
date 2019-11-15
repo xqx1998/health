@@ -1,11 +1,10 @@
 package com.xqx.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.eight.group.pojo.TUser;
+import com.eight.group.pojo.User;
 import com.xqx.eight.group.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,7 +28,7 @@ public class SpringSecurityUserService2 implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("用户输入的用户名:"+username);
         //根据用户名查询数据库获得用户信息
-        TUser dbUser = userService.findByUsername(username);
+        User dbUser = userService.findByUsername(username);
         if (dbUser == null){
             return null;
         }
@@ -42,6 +41,6 @@ public class SpringSecurityUserService2 implements UserDetailsService {
         grantedAuthorityArrayList.add(new SimpleGrantedAuthority("permission_B"));
         //授予角色
         grantedAuthorityArrayList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        return new User(dbUser.getUsername(), "{noop}"+dbUser.getPassword(), grantedAuthorityArrayList);
+        return new org.springframework.security.core.userdetails.User(dbUser.getUsername(), "{noop}"+dbUser.getPassword(), grantedAuthorityArrayList);
     }
 }

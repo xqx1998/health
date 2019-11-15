@@ -9,16 +9,19 @@
     <!-- 引入ElementUI组件库 -->
     <script src="/js/index.js"></script>
     <script src="/js/axios-0.18.0.js"></script>
+    <script>
+        location.href = "/pages/main.html";
+    </script>
 </head>
 <body>
-<div id="app">
-    <!--
+<!--<div id="app">
+    &lt;!&ndash;
 rules：表单验证规则
--->
+&ndash;&gt;
     <el-form label-width="80px">
-        <!--
+        &lt;!&ndash;
             prop：表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的
-        -->
+        &ndash;&gt;
         <el-form-item label="用户名" prop="user.username">
             <el-input v-model="user.username"></el-input>
         </el-form-item>
@@ -49,6 +52,6 @@ rules：表单验证规则
             }
         });
     </script>
-</div>
+</div>-->
 </body>
 </html>

@@ -44,7 +44,6 @@ public class CheckItemServiceImpl implements CheckItemService {
         //调用mapper查询
         List<CheckItem> list = checkItemMapper.findPageByCondition(queryPageBean.getQueryString());
 
-        list.forEach(s-> System.out.println(s));
         //放回封装后的结果
         return new PageResult(new PageInfo<>(list).getTotal(),list);
     }
