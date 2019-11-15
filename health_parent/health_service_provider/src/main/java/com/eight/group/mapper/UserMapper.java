@@ -15,4 +15,6 @@ public interface UserMapper {
      */
     // @Select("select * from user where username = #{user.username} AND password = #{user.password}")
     TUser getUserByUsernameAndPassword(TUser TUser);
+
+    TUser findByUsername(String username);
 }

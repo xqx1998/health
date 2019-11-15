@@ -20,4 +20,10 @@ public class UserServiceImpl implements UserService {
     public boolean login(TUser TUser) {
         return userMapper.getUserByUsernameAndPassword(TUser)!=null;
     }
+
+
+    @Override
+    public TUser findByUsername(String username) {
+        return userMapper.findByUsername(username);
+    }
 }

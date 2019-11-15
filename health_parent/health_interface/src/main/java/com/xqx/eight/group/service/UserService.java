@@ -8,4 +8,6 @@ import com.eight.group.pojo.TUser;
  */
 public interface UserService {
     boolean login(TUser TUser);
+
+    TUser findByUsername(String username);
 }
