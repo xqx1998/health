@@ -2,6 +2,7 @@ package com.eight.group.mapper;
 
 import com.eight.group.pojo.CheckGroup;
 import com.eight.group.pojo.Setmeal;
+import com.eight.group.vo.SetmealReportVO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,4 +60,5 @@ public interface SetmealMapper {
     List<Setmeal> findAll();
 
     Setmeal findByIdDetail(int intValue);
+
 }

@@ -85,6 +85,4 @@
     <select id="findMemberTotalCount" resultType="java.lang.Integer">
         elect count(id) from t_member
     </select>
-
-
 </mapper>

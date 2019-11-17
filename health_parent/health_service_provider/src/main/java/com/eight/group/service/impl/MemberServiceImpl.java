@@ -4,8 +4,13 @@ package com.eight.group.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.eight.group.mapper.MemberMapper;
 import com.eight.group.pojo.Member;
+import com.eight.group.vo.MemberCountMonthVO;
 import com.xqx.eight.group.service.MemberService;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author：xingquanxiang createTime：2019/11/13 23:46
@@ -36,4 +41,5 @@ public class MemberServiceImpl implements MemberService {
     public void add(Member member) {
         memberMapper.add(member);
     }
+
 }

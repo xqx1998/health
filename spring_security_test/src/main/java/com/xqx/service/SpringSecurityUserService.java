@@ -53,7 +53,8 @@ public class SpringSecurityUserService implements UserDetailsService {
         }
         //密码加密并创建securityUser对象
         org.springframework.security.core.userdetails.User securityUser =
-                new org.springframework.security.core.userdetails.User(dbUser.getUsername(), bCryptPasswordEncoder.encode(dbUser.getPassword()), grantedAuthorityArrayList);
+                new org.springframework.security.core.userdetails.User(dbUser.getUsername(),
+                        bCryptPasswordEncoder.encode(dbUser.getPassword()), grantedAuthorityArrayList);
         // 加密后：securityUser.getPassword() = $2a$10$y1uiddCVG8nbeA.WN4vh2ORm8N6ZTDeK9/fZzYt7t5aY/J9iVATtu
         System.out.println("加密后：securityUser.getPassword() = " + securityUser.getPassword());
         return securityUser;

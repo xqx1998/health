@@ -2,6 +2,9 @@ package com.xqx.eight.group.service;
 
 import com.eight.group.pojo.Member;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author： xingquanxiang
  * createTime：2019/11/13 23:44
@@ -20,4 +23,5 @@ public interface MemberService {
      * @param member
      */
     void add(Member member);
+
 }

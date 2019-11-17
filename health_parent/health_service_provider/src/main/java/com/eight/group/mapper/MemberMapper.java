@@ -1,6 +1,7 @@
 package com.eight.group.mapper;
 
 import com.eight.group.pojo.Member;
+import com.eight.group.vo.MemberCountMonthVO;
 import com.github.pagehelper.Page;
 
 import java.util.List;

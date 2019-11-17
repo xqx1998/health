@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eight.group.mapper.ReportMapper">
+    <!--根据月份统计会员数量-->
+    <select id="findMemberCountByMonth" resultType="com.eight.group.vo.MemberCountMonthVO">
+        select date_format(regTime, '%Y-%m') month , count(id) count
+        from t_member
+        where regTime &gt;= #{beginDate}
+        group by date_format(regTime, '%Y-%m')
+        order by month asc
+    </select>
+
+    <!--统计每个套餐预约数量-->
+    <select id="findOrderCountBySetmeal" resultType="com.eight.group.vo.SetmealReportVO">
+        select count(o.setmeal_id) 'value', s.name name
+        from t_setmeal s left join t_order o on s.id = o.setmeal_id
+        group by s.id
+    </select>
+
+    <!--
+     * 统计运营数据
+     * 新增会员数, 总会员数, 本周新增会员数, 本月新增会员数
+     * 今日预约数	, 今日到诊数
+     * 本周预约数	, 本周到诊数
+     * 本月预约数	, 本月到诊数
+    -->
+    <select id="getBusinessReportData" resultType="java.util.Map">
+        select *
+        from
+            (select curdate() reportDate) k,
+            (select count(id) todayNewMember from t_member where regTime = curdate()) a,
+            (select count(id) totalMember from t_member) b,
+            (select count(id) thisWeekNewMember from t_member where regTime >= curdate()-weekday(curdate())) c,
+            (select count(id) thisMonthNewMember from t_member where regTime >= curdate()-DAYOFMONTH(curdate())) d,
+            (select count(id) todayOrderNumber from t_order where orderDate = curdate()) e,
+            (select count(id) todayVisitsNumber from t_order where orderDate = curdate() and orderStatus = '已到诊') f,
+            (select count(id) thisWeekOrderNumber from t_order where orderDate >= curdate()-weekday(curdate())) g,
+            (select count(id) thisWeekVisitsNumber from t_order where orderDate >= curdate()-weekday(curdate()) and orderStatus = '已到诊') h,
+            (select count(id) thisMonthOrderNumber from t_order where orderDate >= curdate()-DAYOFMONTH(curdate())) i,
+            (select count(id) thisMonthVisitsNumber from t_order where orderDate >= curdate()-DAYOFMONTH(curdate()) and orderStatus = '已到诊') j;
+    </select>
+
+    <!--热门套餐（套餐名称、预约数量、占比）-->
+    <select id="getHotSetmeal" parameterType="int" resultType="java.util.Map">
+        select
+            s.name name, count(o.id) setmeal_count, count(o.id)/(select count(id) from t_order) proportion, s.remark remark
+        from t_setmeal s left join t_order o on s.id = o.setmeal_id
+        group by o.setmeal_id
+        order by setmeal_count desc
+        limit #{limitCount};
+    </select>
+
+
+</mapper>
